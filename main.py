@@ -1,16 +1,11 @@
 """
 """
-import deta
-import fastapi
-from .src.mapapp import MapAppSettings
+from fastapi import FastAPI
 
-# initialization
-settings = MapAppSettings()
-deta = deta.Deta()
-db = deta.Base(settings.deta_base_name)
-app = fastapi.FastAPI()
+app = FastAPI()
 
-
+# define root route
+# (i.e. the home page, or "/")
 @app.get("/")
 async def root():
-	return {"data": {"message": "Hello, world!"}}
+    return "Hello world!"
