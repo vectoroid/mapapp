@@ -107,5 +107,5 @@ class FeatureCollection(pydantic.BaseModel):
     """
     """
     id: LocationID
-    type: GeoJsonTypes.FEATURE_COLLECTION
+    type: GeoJsonTypes.FEATURE_COLLECTION.value
     features: typing.List[Feature]
