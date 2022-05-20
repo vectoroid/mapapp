@@ -86,6 +86,7 @@ class NewFeature(pydantic.BaseModel):
     geometry: GeoJsonTypes.POINT.value
     properties: FeatureProperties
     
+    
 class Feature(pydantic.BaseModel):
     """
     Represents a single location in the MapApp map
@@ -103,8 +104,21 @@ class Feature(pydantic.BaseModel):
     properties: typing.Dict
     
     
+class NewFeatureCollection(pydantic.BaseModel):
+    """
+    A collection of Feature objects
+    - note: the list of Features is allowed to be empty, 
+      according to the GeoJSON specification.
+    """
+    type: GeoJsonTypes.FEATURE_COLLECTION.value
+    features: typing.List[Feature]
+    
+    
 class FeatureCollection(pydantic.BaseModel):
     """
+    A collection of Feature objects
+    - note: the list of Features is allowed to be empty, 
+      according to the GeoJSON specification.
     """
     id: LocationID
     type: GeoJsonTypes.FEATURE_COLLECTION.value
