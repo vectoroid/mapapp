@@ -76,7 +76,7 @@ class Feature(pydantic.BaseModel):
           however, in this application, I anticipate needing to save only single-point locations.
           naturally, if that changes, some refactoring will be needed.
     """
-    id: uuid.uuid4
+    id: LocationID
     type: GeoJsonTypes.FEATURE.value
     geometry: GeoJsonTypes.POINT.value
     properties: typing.Dict
@@ -85,6 +85,6 @@ class Feature(pydantic.BaseModel):
 class FeatureCollection(pydantic.BaseModel):
     """
     """
-    id: uuid.uuid4
+    id: LocationID
     type: GeoJsonTypes.FEATURE_COLLECTION
     features: typing.List[Feature]
