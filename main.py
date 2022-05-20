@@ -27,12 +27,10 @@ async def root():
 @app.post("/features/new")
 async def create_new_feature(new_feature: NewFeature) -> dict:
 	try:
-		new_feature.id = uuid.uuid4()
-		new_feature.created_at = datetime.datetime.now()
-		new_feature.updated_at = datetime.datetime.now()
+		# new_feature.id = uuid.uuid4()
+		# new_feature.updated_at = datetime.datetime.now()
+		# new_feature.created_at = datetime.datetime.now()
 		return new_feature
-	except Exception as e:
-		print(e)
-
-	return False
+	except ValidationError as e:
+		return e.json()
     
