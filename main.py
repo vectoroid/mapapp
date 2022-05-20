@@ -3,7 +3,7 @@
 import fastapi
 from deta import Deta
 
-from src.mapapp.geojson.schema import Feature
+from src.mapapp.geojson.schema import NewFeature
 
 # config - for now, just put everything in a single file, until errors are eliminated.
 db_config = {
@@ -22,6 +22,6 @@ async def root():
     return "Hello world!"
 
 @app.post("/features/new")
-async def create_new_feature(feature: Feature) -> dict:
-    return feature
+async def create_new_feature(new_feature: NewFeature) -> dict:
+    return new_feature
     
