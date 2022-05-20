@@ -101,7 +101,7 @@ class Feature(pydantic.BaseModel):
     id: LocationID
     type: GeoJsonTypes.FEATURE.value
     geometry: GeoJsonTypes.POINT.value
-    properties: typing.Dict
+    properties: FeatureProperties
     
     
 class NewFeatureCollection(pydantic.BaseModel):
