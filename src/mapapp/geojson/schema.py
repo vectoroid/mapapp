@@ -6,9 +6,19 @@ import pydantic
 import typing
 import uuid
 
+
+# Types
+LocationID = typing.NewType('LocationID', uuid.UUID)
     
 class GeoJsonTypes(enum.Enum):
     """
+    class GeoJsonTypes
+    
+    - this is just a convenient place (well, object) in which
+      to store this data
+      
+    - these four GeoJSON data types are the only GeoJSON types I 
+      anticipate needing for this app; time will tell ...
     """
     POINT = 'Point'
     MULTIPOINT = 'MultiPoint'
@@ -19,16 +29,16 @@ class GeoJsonTypes(enum.Enum):
 class Position(pydantic.BaseModel):
     """
     GeoJSON's most fundamental object -- Position has:
-    (1)  Longtitude (easting)
-    (2)  Latitude (northing)
-    (3)  Altitude (elevation)
+    (1)  Longtitude (easting)   -- x
+    (2)  Latitude (northing)    -- y  
+    (3)  Altitude (elevation)   -- z (optional)
     """
     longitude: float
     latitude: float
     altitude: float
     
     
-class BaseGeometry(typing.TypedDict):
+class BaseGeometry(pydantic.BaseModel):
     """
     Base class for GeoJSON geometry objects
     """
@@ -39,14 +49,14 @@ class BaseGeometry(typing.TypedDict):
 class Point(BaseGeometry):
     """
     """
-    type: GeoJsonTypes.POINT
+    type: GeoJsonTypes.POINT.value
     coordinates: Position
     
     
 class MultiPoint(BaseGeometry):
     """
     """
-    type: GeoJsonTypes.MULTIPOINT
+    type: GeoJsonTypes.MULTIPOINT.value
     coordinates: typing.List[Position]
     
     
@@ -67,8 +77,8 @@ class Feature(pydantic.BaseModel):
           naturally, if that changes, some refactoring will be needed.
     """
     id: uuid.uuid4
-    type: GeoJsonTypes.FEATURE
-    geometry: Point
+    type: GeoJsonTypes.FEATURE.value
+    geometry: GeoJsonTypes.POINT.value
     properties: typing.Dict
     
     
