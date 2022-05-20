@@ -65,10 +65,10 @@ class FeatureProperties(pydantic.BaseModel):
     """
     Bespoke properties (i.e. metadata) about each location saved in the database.
     """
-    name: str = pydantic.Field()
-    notes: str = pydantic.Field()
-    created_at: datetime.datetime
-    updated_at: datetime.datetime
+    name: str
+    notes: typing.Optional[str] = None
+    created_at: str = None
+    updated_at: str = None
 
 
 class NewFeature(pydantic.BaseModel):
@@ -87,7 +87,7 @@ class NewFeature(pydantic.BaseModel):
     properties: FeatureProperties
     
     
-class Feature(pydantic.BaseModel):
+class Feature(NewFeature):
     """
     Represents a single location in the MapApp map
     - i.e. ALREADY SAVED in Deta Base
@@ -99,9 +99,6 @@ class Feature(pydantic.BaseModel):
           locations. naturally, if that changes, some refactoring will be needed.
     """
     id: LocationID
-    type: GeoJsonTypes.FEATURE.value
-    geometry: GeoJsonTypes.POINT.value
-    properties: FeatureProperties
     
     
 class NewFeatureCollection(pydantic.BaseModel):
