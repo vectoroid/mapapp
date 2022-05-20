@@ -3,7 +3,7 @@
 import fastapi
 from deta import Deta
 
-from .src.mapapp.geojson.schema import Feature
+from src.mapapp.geojson.schema import Feature
 
 # config - for now, just put everything in a single file, until errors are eliminated.
 db_config = {
