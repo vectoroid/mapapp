@@ -65,6 +65,7 @@ class LocationProperties(pydantic.BaseModel):
     Bespoke properties (i.e. metadata) about each location saved in the database.
     """
     name: str = pydantic.Field()
+    notes: str = pydantic.Field()
     
     
     
