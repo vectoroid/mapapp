@@ -4,3 +4,5 @@
 # Gitpod
 .gitpod.yml
 
+# Python
+*.pyc
