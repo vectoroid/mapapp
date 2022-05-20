@@ -1,6 +1,8 @@
 """
 """
+import datetime
 import fastapi
+import uuid
 from deta import Deta
 
 from src.mapapp.geojson.schema import NewFeature
@@ -23,5 +25,8 @@ async def root():
 
 @app.post("/features/new")
 async def create_new_feature(new_feature: NewFeature) -> dict:
+    new_feature.id = uuid.uuid4()
+    new_feature.created_at = datetime.datetime.now()
+    new_feature.updated_at = datetime.datetime.now()
     return new_feature
     
