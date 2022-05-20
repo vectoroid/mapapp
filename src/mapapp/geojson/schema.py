@@ -1,6 +1,7 @@
 """
 GeoJSON schema as Pydantic models
 """
+import datetime
 import enum
 import pydantic
 import typing
@@ -66,16 +67,33 @@ class FeatureProperties(pydantic.BaseModel):
     """
     name: str = pydantic.Field()
     notes: str = pydantic.Field()
+
+
+class NewFeature(pydantic.BaseModel):
+    """
+    Represents a single location in the MapApp map
+    - i.e. NOT YET SAVED in Deta Base
     
-    
+    note: in the GeoJSON specification, it is not true that a `Feature` represents (geometryically)
+          only a Point; 
+          the geometry of a feature can be set to any of the geometry types.
+          however, in this application, I anticipate needing to save only single-point 
+          locations. naturally, if that changes, some refactoring will be needed.
+    """    
+    type: GeoJsonTypes.FEATURE.value
+    geometry: GeoJsonTypes.POINT.value
+    properties: FeatureProperties
     
 class Feature(pydantic.BaseModel):
     """
     Represents a single location in the MapApp map
+    - i.e. ALREADY SAVED in Deta Base
     
-    note: in the GeoJSON specification, this is not true; the geometry of a feature can be set to any of the geometry types.
-          however, in this application, I anticipate needing to save only single-point locations.
-          naturally, if that changes, some refactoring will be needed.
+    note: in the GeoJSON specification, it is not true that a `Feature` represents (geometryically)
+          only a Point; 
+          the geometry of a feature can be set to any of the geometry types.
+          however, in this application, I anticipate needing to save only single-point 
+          locations. naturally, if that changes, some refactoring will be needed.
     """
     id: LocationID
     type: GeoJsonTypes.FEATURE.value
