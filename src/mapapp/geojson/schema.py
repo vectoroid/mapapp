@@ -67,6 +67,8 @@ class FeatureProperties(pydantic.BaseModel):
     """
     name: str = pydantic.Field()
     notes: str = pydantic.Field()
+    created_at: datetime.datetime
+    updated_at: datetime.datetime
 
 
 class NewFeature(pydantic.BaseModel):
