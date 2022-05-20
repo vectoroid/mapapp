@@ -60,7 +60,7 @@ class MultiPoint(BaseGeometry):
     coordinates: typing.List[Position]
     
     
-class LocationProperties(pydantic.BaseModel):
+class FeatureProperties(pydantic.BaseModel):
     """
     Bespoke properties (i.e. metadata) about each location saved in the database.
     """
