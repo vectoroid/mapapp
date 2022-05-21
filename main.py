@@ -7,7 +7,10 @@ import pydantic
 import uuid
 from deta import Deta
 
-from src.mapapp.geojson.schema import NewFeature
+try:
+    from src.mapapp.geojson.schema import NewFeature
+except ImportError as e:
+    print(e)
 
 # config - for now, just put everything in a single file, until errors are eliminated.
 db_config = {
