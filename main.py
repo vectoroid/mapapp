@@ -3,8 +3,13 @@ MapApp - save your favorite locations
 """
 import datetime
 import fastapi
-import pydantic
 import uuid
+
+try:
+	import pydantic
+except ImportError as e:
+    print(e)
+    exit()
 
 try:
 	from deta import Deta
