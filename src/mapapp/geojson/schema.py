@@ -46,6 +46,10 @@ class BaseGeometry(pydantic.BaseModel):
     type: str
     coordinates: Position
     
+    # Model config for this and subclasses
+    # class Config:
+    #     extra = pydantic.Extra.forbid
+    
 
 class Point(BaseGeometry):
     """
@@ -83,7 +87,7 @@ class NewFeature(pydantic.BaseModel):
           locations. naturally, if that changes, some refactoring will be needed.
     """    
     type: GeoJsonTypes.FEATURE.value
-    geometry: GeoJsonTypes.POINT.value
+    geometry: Point
     properties: FeatureProperties
     
     
