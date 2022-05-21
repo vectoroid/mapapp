@@ -3,35 +3,19 @@ MapApp - save your favorite locations
 """
 import datetime
 import fastapi
+import pydantic
 import uuid
 
-try:
-	import pydantic
-except ImportError as e:
-    print(e)
-    exit()
+from deta import Deta
 
-try:
-	from deta import Deta
-except ImportError as e:
-    print(e)
-    exit()
+from src.mapapp.geojson.schema import NewFeature
 
-try:
-    from src.mapapp.geojson.schema import NewFeature
-except ImportError as e:
-    print(e)
-    exit()
-
-try:
-    # config - for now, just put everything in a single file, until errors are eliminated.
-	db_name = "execas_mapapp_locations"
-	deta = Deta()
-	async_db = deta.AsyncBase(db_name)
-	app = fastapi.FastAPI()
-except Exception as e:
-    print(e)
-    exit()
+# Deta instantiation & Deta Base config
+# config - for now, just put everything in a single file, until errors are eliminated.
+db_name = "execas_mapapp_locations"
+deta = Deta()
+async_db = deta.AsyncBase(db_name)
+app = fastapi.FastAPI()
 
 
 # define root route
