@@ -65,6 +65,14 @@ class MultiPoint(BaseGeometry):
     coordinates: typing.List[Position]
     
     
+class NewFeatureProperties(pydantic.BaseModel):
+    """
+    Bespoke properties (i.e. metadata) about each location saved in the database.
+    """
+    name: str
+    notes: typing.Optional[str] = None  
+    
+    
 class FeatureProperties(pydantic.BaseModel):
     """
     Bespoke properties (i.e. metadata) about each location saved in the database.
@@ -88,7 +96,7 @@ class NewFeature(pydantic.BaseModel):
     """    
     type: GeoJsonTypes.FEATURE.value
     geometry: Point
-    properties: FeatureProperties
+    properties: NewFeatureProperties
     
     
 class Feature(NewFeature):
@@ -103,6 +111,7 @@ class Feature(NewFeature):
           locations. naturally, if that changes, some refactoring will be needed.
     """
     id: LocationID
+    properties: FeatureProperties
     
     
 class NewFeatureCollection(pydantic.BaseModel):
