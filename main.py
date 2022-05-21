@@ -3,6 +3,7 @@ MapApp - save your favorite locations
 """
 import datetime
 import fastapi
+import pydantic
 import uuid
 from deta import Deta
 
@@ -31,6 +32,6 @@ async def create_new_feature(new_feature: NewFeature) -> dict:
 		# new_feature.updated_at = datetime.datetime.now()
 		# new_feature.created_at = datetime.datetime.now()
 		return new_feature
-	except ValidationError as e:
+	except pydantic.ValidationError as e:
 		return e.json()
     
