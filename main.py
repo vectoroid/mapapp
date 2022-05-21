@@ -12,7 +12,7 @@ from src.mapapp.geojson.schema import NewFeature
 
 # Deta instantiation & Deta Base config
 # config - for now, just put everything in a single file, until errors are eliminated.
-db_name = "execas_mapapp_locations"
+db_name = "execas_mapapp_geolocations"
 deta = Deta()
 async_db = deta.AsyncBase(db_name)
 app = fastapi.FastAPI()
